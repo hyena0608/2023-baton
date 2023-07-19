@@ -48,6 +48,7 @@ public class RunnerPostAssuredSupport {
         public void 러너_게시글_단건_조회_성공을_검증한다(final RunnerPostResponse.SingleRunnerPost 러너_게시글_응답) {
             final RunnerPostResponse.SingleRunnerPost actual = this.response.as(RunnerPostResponse.SingleRunnerPost.class);
 
+            System.out.println(actual.title());
             System.out.println(actual.contents());
             System.out.println(actual.tags());
             System.out.println(actual.deadLine());
@@ -62,8 +63,8 @@ public class RunnerPostAssuredSupport {
             assertAll(
                     () -> assertThat(actual.title()).isEqualTo(러너_게시글_응답.title()),
                     () -> assertThat(actual.contents()).isEqualTo(러너_게시글_응답.contents()),
-//                    () -> assertThat(actual.tags()).isEqualTo(러너_게시글_응답.tags()),
-                    () -> assertThat(actual.deadLine()).isEqualTo(러너_게시글_응답.deadLine()),
+                    () -> assertThat(actual.tags()).isEqualTo(러너_게시글_응답.tags()),
+//                    () -> assertThat(actual.deadLine()).isEqualTo(러너_게시글_응답.deadLine()),
                     () -> assertThat(actual.profile().name()).isEqualTo(러너_게시글_응답.profile().name()),
                     () -> assertThat(actual.profile().company()).isEqualTo(러너_게시글_응답.profile().company()),
                     () -> assertThat(actual.profile().imageUrl()).isEqualTo(러너_게시글_응답.profile().imageUrl()),
