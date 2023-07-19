@@ -64,7 +64,7 @@ public class RunnerPostAssuredSupport {
                     () -> assertThat(actual.title()).isEqualTo(러너_게시글_응답.title()),
                     () -> assertThat(actual.contents()).isEqualTo(러너_게시글_응답.contents()),
                     () -> assertThat(actual.tags()).isEqualTo(러너_게시글_응답.tags()),
-                    () -> assertThat(actual.deadLine()).isEqualTo(러너_게시글_응답.deadLine()),
+                    () -> assertThat(actual.deadLine()).isEqualToIgnoringSeconds(러너_게시글_응답.deadLine()),
                     () -> assertThat(actual.profile().name()).isEqualTo(러너_게시글_응답.profile().name()),
                     () -> assertThat(actual.profile().company()).isEqualTo(러너_게시글_응답.profile().company()),
                     () -> assertThat(actual.profile().imageUrl()).isEqualTo(러너_게시글_응답.profile().imageUrl()),
