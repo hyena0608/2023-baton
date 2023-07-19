@@ -1,15 +1,15 @@
 package touch.baton.assure.runnerpost;
 
 import org.junit.jupiter.api.Test;
-import touch.baton.assure.fixture.MemberFixture;
-import touch.baton.assure.fixture.RunnerFixture;
-import touch.baton.assure.fixture.RunnerPostFixture;
 import touch.baton.config.AssuredTestConfig;
-import touch.baton.domain.common.vo.Grade;
+import touch.baton.domain.common.vo.*;
 import touch.baton.domain.member.Member;
+import touch.baton.domain.member.vo.*;
 import touch.baton.domain.runner.Runner;
 import touch.baton.domain.runnerpost.RunnerPost;
 import touch.baton.domain.runnerpost.controller.response.RunnerPostResponse;
+import touch.baton.domain.runnerpost.vo.Deadline;
+import touch.baton.domain.runnerpost.vo.PullRequestUrl;
 import touch.baton.domain.tag.RunnerPostTags;
 
 import java.time.LocalDateTime;
@@ -19,28 +19,35 @@ class RunnerPostAssuredReadTest extends AssuredTestConfig {
 
     @Test
     void 러너의_게시글_식별자값으로_러너_게시글_상세_정보_조회에_성공한다() {
-        final Member member = MemberFixture.from("헤나",
-                "test@test.com",
-                "1jgiwng9213n0f1",
-                "https://",
-                "우아한테크코스",
-                "https://"
-        );
+        final Member member = Member.builder()
+                .memberName(new MemberName("헤에디주"))
+                .email(new Email("test@test.co.kr"))
+                .oauthId(new OauthId("dsigjh98gh230gn2oinv913bcuo23nqovbvu93b12voi3bc31j"))
+                .githubUrl(new GithubUrl("github.com/hyena0608"))
+                .company(new Company("우아한형제들"))
+                .imageUrl(new ImageUrl("https://"))
+                .build();
         memberRepository.save(member);
 
-        final Runner runner = RunnerFixture.from(member, 0, Grade.BARE_FOOT);
+        final Runner runner = Runner.builder()
+                .totalRating(new TotalRating(100))
+                .grade(Grade.BARE_FOOT)
+                .member(member)
+                .build();
         runnerRepository.save(runner);
 
-        final RunnerPost runnerPost = RunnerPostFixture.from(runner,
-                null,
-                "제 코드를 리뷰해주세요",
-                "제 코드의 내용은 이렇습니다.",
-                "https://",
-                LocalDateTime.now(),
-                0,
-                0,
-                new RunnerPostTags(new ArrayList<>())
-        );
+        final LocalDateTime deadline = LocalDateTime.now();
+        final RunnerPost runnerPost = RunnerPost.builder()
+                .title(new Title("제 코드 리뷰 좀 해주세요!!"))
+                .contents(new Contents("제 코드는 클린코드가 맞을까요?"))
+                .deadline(new Deadline(deadline))
+                .pullRequestUrl(new PullRequestUrl("https://"))
+                .watchedCount(new WatchedCount(0))
+                .chattingRoomCount(new ChattingRoomCount(0))
+                .runnerPostTags(new RunnerPostTags(new ArrayList<>()))
+                .runner(runner)
+                .supporter(null)
+                .build();
         runnerPostRepository.save(runnerPost);
 
         RunnerPostAssuredSupport
