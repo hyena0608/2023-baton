@@ -29,6 +29,7 @@ jobs:
         with:
           push: true
           tags: 2023baton/2023baton:latest
+          file: ../../backend/baton/Dockerfile
 
   deploy:
     runs-on: self-hosted
